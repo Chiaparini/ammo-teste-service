@@ -6,10 +6,6 @@ const Picture = models.Picture;
 
 const getProducts = async (limit, page, search = '') => {
   try {
-    console.log('limit:', limit);
-    console.log('page:', page);
-    console.log('search:', search);
-    
     if (page >= 1) page -= 1;
   
     const offset = page * limit;
