@@ -7,7 +7,7 @@ Este serviço foi construído com [node.js](https://nodejs.org/en/) [ExpressJS](
 Existem dois arquivos .json que necessitam ser configurados para rodar o projeto, são eles:
 
  1. `.config/aws.config.json`
- 2. `.config/config.json`
+ 2. `.config/config.js`
 
 Inserir as devidas chaves e os endereços para as bases de dados.
 
@@ -20,3 +20,5 @@ Após realizar as configs, executar:
 
 Para rodar o projeto:
 `npm run dev`
+
+> Esse projeto utiliza um codepipe line, todo commit na master ira atualizar o EC2

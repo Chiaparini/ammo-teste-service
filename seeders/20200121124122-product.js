@@ -35,7 +35,7 @@ module.exports = {
           Key: `imgs/${img}`,
           Body: fileContent,
           ACL: 'public-read',
-          ContentType: `image/jpeg`
+          ContentType: `image/${path.extname(img).split('.').pop()}`
         }).promise();
 
         queryInterface.bulkInsert('Picture', [
