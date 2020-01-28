@@ -1,21 +1,20 @@
-const express = require('express');
-const router = express.Router();
 const models = require('../models');
+const { Op } = require('sequelize');
 const Product = models.Product;
 const Style = models.Style;
 const Picture = models.Picture;
-const { Op } = require('sequelize');
 
-router.get('/', (req, res) => {
+const getProducts = async (limit, page, search = '') => {
   try {
-    const limit = Number(req.query.limit) || 10;
-    let page = Number(req.query.page) || 0;
-    const search = req.query.search || '';
-
-    if (req.query.page >= 1) page = req.query.page - 1;
-
+    console.log('limit:', limit);
+    console.log('page:', page);
+    console.log('search:', search);
+    
+    if (page >= 1) page -= 1;
+  
     const offset = page * limit;
-    Product.findAndCountAll({
+
+    const products = await Product.findAndCountAll({
       where: {
         [Op.or]: [
           {
@@ -49,18 +48,16 @@ router.get('/', (req, res) => {
         }
       ],
       distinct: true
-    }).then(o => {
-      const total = o.count;
-      const pages = Math.ceil(total / limit); 
+    });
+    
+    const total = products.count;
+    const pages = Math.ceil(total / limit); 
 
-      res.send({ products: o.rows, pages, total });
-    }).catch(err => { 
-        res.status(500).send(err);
-      }
-    );
-  } catch {
-    res.status(500).send('Something went wrong! :(');
+    return { products: products.rows, pages, total };
+  } catch (err) {
+
+    throw Error(err);
   }
-});
+}
 
-module.exports = router;
+module.exports = { getProducts }

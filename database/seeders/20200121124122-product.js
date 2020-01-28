@@ -1,12 +1,12 @@
 'use strict';
 const fs = require('fs');
 const faker = require('faker');
-const s3 = require('../aws');
-const lençoisMock = require('../mock/lençois');
+const s3 = require('../../aws');
+const lencoisMock = require('../mock/lencois');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const lencois = lençoisMock.map(async (el, index) => {
+    const lencois = lencoisMock.map(async (el, index) => {
       // chance to generate a discount
       let discount = 0;
       if (faker.random.number(100) < 40) {

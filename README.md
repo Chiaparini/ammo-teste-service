@@ -22,3 +22,13 @@ Para rodar o projeto:
 `npm run dev`
 
 > Esse projeto utiliza um codepipe line, todo commit na master ira atualizar o EC2
+
+Para rodar o prjeto em `prod` é necessario também, setar as variaveis de ambiente
+
+```
+NODE_ENV=
+DB_HOST=
+DB_SCHEMA=
+DB_USERNAME=
+DB_PASSWORD=
+```
