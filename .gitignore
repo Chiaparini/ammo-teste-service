@@ -1,6 +1,5 @@
 node_modules
 
 config/aws.config.json
-config/config.json
 
 .env

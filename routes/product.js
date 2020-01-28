@@ -10,12 +10,11 @@ router.get('/', (req, res) => {
   try {
     const limit = Number(req.query.limit) || 10;
     let page = Number(req.query.page) || 0;
-    const search = req.query.search;
+    const search = req.query.search || '';
 
     if (req.query.page >= 1) page = req.query.page - 1;
 
     const offset = page * limit;
-    
     Product.findAndCountAll({
       where: {
         [Op.or]: [
